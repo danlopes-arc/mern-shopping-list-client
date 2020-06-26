@@ -3,9 +3,7 @@ import axios from 'axios'
 export const getItems = () => async dispach => {
   dispach(setItemsLoading())
   try {
-    console.log("before await")
     const res = await axios.get('/api/items')
-    console.log("after await")
     return dispach({
       type: ITEMS_GET,
       payload: res.data
