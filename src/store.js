@@ -6,14 +6,23 @@ const initialState = {}
 
 const middleware = [thunk]
 
-const reduxDevtoolsExtension = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+/**
+ * If in production or the browser doesn't
+ * have the extension, returns a forward
+ * function
+ */
+const reduxDevtoolsExtension = (
+  process.env.NODE_ENV !== 'production' &&
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  window.__REDUX_DEVTOOLS_EXTENSION__()
+ ) || (arg => arg)
 
 const store = createStore(
   rootReducer,
   initialState,
   compose(
     applyMiddleware(...middleware),
-    reduxDevtoolsExtension || (arg => arg)
+    reduxDevtoolsExtension
   )
 )
 

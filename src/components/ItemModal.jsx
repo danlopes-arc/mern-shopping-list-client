@@ -15,7 +15,7 @@ import { addItem } from "../actions/itemsActions";
 
 export class ItemModal extends Component {
   static propTypes = {
-    addItems: PropTypes.func.isRequired
+    addItem: PropTypes.func.isRequired
   };
 
   state = {
@@ -25,10 +25,6 @@ export class ItemModal extends Component {
       name: "",
     },
   };
-
-  onOpened = () => {
-    // document.getElementById('item').focus()
-  }
 
   toggle = () => {
     this.setState({
@@ -59,7 +55,7 @@ export class ItemModal extends Component {
       <div>
         <Button
           color="dark"
-          style={{ marginBottom: "2rem" }}
+          className="mb-3"
           onClick={this.toggle}
         >
           Add Item
@@ -67,7 +63,6 @@ export class ItemModal extends Component {
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
-          onOpened={this.onOpened}
           autoFocus={false}
         >
           <ModalHeader toggle={this.toggle}>Add to shopping list</ModalHeader>
@@ -88,7 +83,6 @@ export class ItemModal extends Component {
                 <Button
                   type="submit"
                   color="dark"
-                  style={{ marginTop: "2rem" }}
                   block
                 >
                   Add Item
